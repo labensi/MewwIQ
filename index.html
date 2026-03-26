@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+  <meta name="theme-color" content="#1a0a2e"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="description" content="MewIQ – تحدي الذكاء | Brain Challenge"/>
+  <title>MewIQ 🐾</title>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body class="dark">
+
+  <!-- ════════════ INTRO OVERLAY ════════════ -->
+  <div id="intro-overlay" class="intro-overlay">
+    <div class="intro-backdrop"></div>
+    <div class="intro-card">
+
+      <!-- Animated Cat -->
+      <div class="intro-cat-wrap">
+        <div class="intro-cat">
+          <div class="intro-ear intro-ear-l"></div>
+          <div class="intro-ear intro-ear-r"></div>
+          <div class="intro-cat-head">
+            <div class="intro-eyes">
+              <div class="intro-eye"><div class="intro-pupil"></div></div>
+              <div class="intro-eye"><div class="intro-pupil"></div></div>
+            </div>
+            <div class="intro-nose"></div>
+            <div class="intro-mouth"></div>
+            <div class="intro-whiskers">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="intro-tail"></div>
+        </div>
+        <!-- Floating paw prints -->
+        <div class="paw-float pf1">🐾</div>
+        <div class="paw-float pf2">🐾</div>
+        <div class="paw-float pf3">🐾</div>
+      </div>
+
+      <!-- Speech Bubble -->
+      <div class="speech-bubble">
+        <p id="introSpeech" class="speech-text"></p>
+      </div>
+
+      <!-- Warning box -->
+      <div class="intro-warning-box">
+        <span class="iw-icon">⚠️</span>
+        <p data-ar="لديك محاولة واحدة فقط — لا توجد إعادة!"
+           data-en="One attempt only — no retries!">
+          لديك محاولة واحدة فقط — لا توجد إعادة!
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <button class="btn-primary intro-start-btn" onclick="dismissIntro()">
+        <span data-ar="فهمت! جاهز 🐾" data-en="Got it! Ready 🐾">فهمت! جاهز 🐾</span>
+      </button>
+
+      <p class="intro-note"
+         data-ar="اقرأ كل سؤال بعناية – لا يمكنك العودة!"
+         data-en="Read every question carefully – you can't go back!">
+        اقرأ كل سؤال بعناية – لا يمكنك العودة!
+      </p>
+    </div>
+  </div>
+
+  <!-- ════════════ CONTROLS BAR ════════════ -->
+  <div class="controls-bar">
+    <button class="ctrl-btn" id="langBtn"  onclick="toggleLanguage()" title="Language">EN</button>
+    <button class="ctrl-btn" id="soundBtn" onclick="toggleSound()"    title="Sound">🔊</button>
+    <button class="ctrl-btn" id="themeBtn" onclick="toggleTheme()"    title="Theme">🌙</button>
+  </div>
+
+  <!-- ════════════════════ HOME ════════════════════ -->
+  <section id="screen-home" class="screen active">
+    <div class="home-wrap">
+
+      <div class="brand">
+        <div class="cat-face">
+          <div class="ear ear-l"></div>
+          <div class="ear ear-r"></div>
+          <div class="cat-head">
+            <div class="eyes">
+              <div class="eye"><div class="pupil"></div></div>
+              <div class="eye"><div class="pupil"></div></div>
+            </div>
+            <div class="nose"></div>
+            <div class="mouth"></div>
+            <div class="whiskers">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <h1 class="logo-text">Mew<span>IQ</span></h1>
+        <p class="tagline"
+           data-ar="هل أنتَ أذكى من القطط؟ 🐾"
+           data-en="Are you smarter than cats? 🐾">هل أنتَ أذكى من القطط؟ 🐾</p>
+      </div>
+
+      <!-- One-attempt notice -->
+      <div class="one-attempt-notice">
+        <span>⚠️</span>
+        <span data-ar="محاولة واحدة فقط – اختر بحكمة!"
+              data-en="One attempt only – choose wisely!">محاولة واحدة فقط – اختر بحكمة!</span>
+      </div>
+
+      <div class="card home-card">
+
+        <!-- Avatar -->
+        <div class="avatar-zone" id="avatarZone" onclick="document.getElementById('avatarInput').click()">
+          <div class="avatar-ring">
+            <div class="avatar-img" id="avatarImg"><span>🐾</span></div>
+          </div>
+          <p class="avatar-hint"
+             data-ar="اضغط لرفع صورتك"
+             data-en="Tap to upload photo">اضغط لرفع صورتك</p>
+          <input type="file" id="avatarInput" accept="image/*" hidden onchange="handleAvatar(event)"/>
+        </div>
+
+        <!-- Name -->
+        <div class="field-group">
+          <label data-ar="✏️ اسمك" data-en="✏️ Your Name">✏️ اسمك</label>
+          <input type="text" id="userName" maxlength="20" autocomplete="off"
+                 data-placeholder-ar="أدخل اسمك هنا..."
+                 data-placeholder-en="Enter your name..."
+                 placeholder="أدخل اسمك هنا..."/>
+        </div>
+
+        <!-- Age -->
+        <div class="field-group">
+          <label data-ar="🎂 عمرك" data-en="🎂 Your Age">🎂 عمرك</label>
+          <select id="userAge">
+            <option value="" disabled selected
+                    data-ar="— اختر عمرك —"
+                    data-en="— Select age —">— اختر عمرك —</option>
+            <option value="u13"  data-ar="أقل من 13" data-en="Under 13">أقل من 13</option>
+            <option value="1317" data-ar="13 – 17"   data-en="13 – 17">13 – 17</option>
+            <option value="1824" data-ar="18 – 24"   data-en="18 – 24">18 – 24</option>
+            <option value="2534" data-ar="25 – 34"   data-en="25 – 34">25 – 34</option>
+            <option value="3544" data-ar="35 – 44"   data-en="35 – 44">35 – 44</option>
+            <option value="45p"  data-ar="45 فأكثر"  data-en="45+">45 فأكثر</option>
+          </select>
+        </div>
+
+        <button class="btn-primary" onclick="startQuiz()">
+          <span data-ar="🚀 ابدأ التحدي الوحيد!" data-en="🚀 Start Your One Attempt!">🚀 ابدأ التحدي الوحيد!</span>
+        </button>
+
+        <div class="mini-stats">
+          <div class="ms"><strong>25</strong><small data-ar="سؤال" data-en="Questions">سؤال</small></div>
+          <span class="paw-sep">🐾</span>
+          <div class="ms"><strong>5</strong><small data-ar="فئات" data-en="Categories">فئات</small></div>
+          <span class="paw-sep">🐾</span>
+          <div class="ms"><strong>15s</strong><small data-ar="للسؤال" data-en="per Q">للسؤال</small></div>
+        </div>
+      </div>
+
+      <button class="btn-ghost" onclick="showScreen('screen-leaderboard')">
+        🏆 <span data-ar="لوحة المتصدرين العالمية" data-en="Global Leaderboard">لوحة المتصدرين العالمية</span>
+      </button>
+
+      <div class="site-credit">Made by <span>LA BENS</span> 🐾</div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ QUIZ ════════════════════ -->
+  <section id="screen-quiz" class="screen">
+    <div class="quiz-wrap">
+
+      <div class="quiz-topbar">
+        <div class="user-chip">
+          <div class="ava-sm" id="quizAva"><span>🐾</span></div>
+          <span class="qname" id="quizName"></span>
+        </div>
+        <div class="qinfo">
+          <span class="q-counter" id="qCounter">1 / 25</span>
+          <span class="cat-pill" id="catPill">منطق</span>
+        </div>
+      </div>
+
+      <div class="prog-track">
+        <div class="prog-fill" id="progFill" style="width:0%"></div>
+      </div>
+
+      <div class="timer-row">
+        <div class="timer-wrap">
+          <svg viewBox="0 0 80 80" class="timer-svg">
+            <circle class="t-bg"  cx="40" cy="40" r="34"/>
+            <circle class="t-arc" id="tArc" cx="40" cy="40" r="34"/>
+          </svg>
+          <span class="t-num" id="tNum">15</span>
+        </div>
+      </div>
+
+      <div class="q-card" id="qCard">
+        <div class="q-type-icon" id="qIcon">🧠</div>
+        <p class="q-text" id="qText"></p>
+      </div>
+
+      <div class="opts-grid" id="optsGrid"></div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════ RESULTS ════════════════════ -->
+  <section id="screen-results" class="screen">
+    <canvas id="confetti-canvas"></canvas>
+    <div class="results-wrap">
+
+      <div class="res-user">
+        <div class="res-ava" id="resAva"><span>🐾</span></div>
+        <div class="res-name" id="resName"></div>
+      </div>
+
+      <!-- Final result stamp -->
+      <div class="stamp-badge">
+        <span>🏅</span>
+        <span data-ar="نتيجتك النهائية – لا إعادة!" data-en="Your Final Result – No Retries!">نتيجتك النهائية – لا إعادة!</span>
+      </div>
+
+      <div class="score-ring-wrap">
+        <svg viewBox="0 0 200 200" class="score-svg">
+          <circle class="sr-bg"   cx="100" cy="100" r="85"/>
+          <circle class="sr-fill" id="srFill" cx="100" cy="100" r="85"/>
+        </svg>
+        <div class="score-inner">
+          <div class="score-val" id="scoreVal">0</div>
+          <div class="score-sub" data-ar="نقطة" data-en="pts">نقطة</div>
+        </div>
+      </div>
+
+      <div class="iq-card">
+        <div class="iq-label" data-ar="تقدير الذكاء التقريبي" data-en="Estimated IQ Range">تقدير الذكاء التقريبي</div>
+        <div class="iq-num" id="iqNum">–</div>
+        <div class="mind-icon" id="mindIcon">🧠</div>
+        <div class="mind-label" id="mindLabel"></div>
+      </div>
+
+      <div id="userRankDisplay" class="rank-badge"></div>
+
+      <div class="breakdown">
+        <div class="bk-item">
+          <div class="bk-icon">⚡</div>
+          <div class="bk-label" data-ar="السرعة" data-en="Speed">السرعة</div>
+          <div class="bk-val" id="bkSpeed">–</div>
+        </div>
+        <div class="bk-item">
+          <div class="bk-icon">🎯</div>
+          <div class="bk-label" data-ar="الدقة" data-en="Accuracy">الدقة</div>
+          <div class="bk-val" id="bkAcc">–</div>
+        </div>
+        <div class="bk-item">
+          <div class="bk-icon">🏅</div>
+          <div class="bk-label" data-ar="الخام" data-en="Raw">الخام</div>
+          <div class="bk-val" id="bkRaw">–</div>
+        </div>
+      </div>
+
+      <div class="analysis-box" id="analysisBox"></div>
+
+      <div class="res-actions">
+        <button class="btn-primary" onclick="shareResult()">
+          📤 <span data-ar="شارك نتيجتك" data-en="Share Result">شارك نتيجتك</span>
+        </button>
+        <button class="btn-ghost" onclick="showScreen('screen-leaderboard')">
+          🏆 <span data-ar="المتصدرون العالميون" data-en="Global Leaderboard">المتصدرون العالميون</span>
+        </button>
+      </div>
+
+      <div class="site-credit">Made by <span>LA BENS</span> 🐾</div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ LEADERBOARD ════════════════════ -->
+  <section id="screen-leaderboard" class="screen">
+    <div class="lb-wrap">
+      <button class="btn-back" onclick="goBack()">
+        <span id="backArrow">→</span>
+        <span data-ar="رجوع" data-en="Back">رجوع</span>
+      </button>
+
+      <div class="lb-header">
+        <div class="lb-trophy">🏆</div>
+        <h2 data-ar="لوحة المتصدرين العالمية" data-en="Global Leaderboard">لوحة المتصدرين العالمية</h2>
+        <p data-ar="أذكى 10 عقول حول العالم في MewIQ" data-en="Top 10 minds worldwide in MewIQ">أذكى 10 عقول حول العالم في MewIQ</p>
+        <div class="lb-live-dot">
+          <span class="live-pulse"></span>
+          <span data-ar="مباشر" data-en="Live">مباشر</span>
+        </div>
+      </div>
+
+      <div class="lb-list" id="lbList">
+        <div class="lb-loading">
+          <div class="lb-spinner"></div>
+          <p data-ar="جاري التحميل..." data-en="Loading...">جاري التحميل...</p>
+        </div>
+      </div>
+
+      <div class="site-credit" style="margin-top:24px">Made by <span>LA BENS</span> 🐾</div>
+    </div>
+  </section>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <!-- ════ Firebase SDK (Compat v10) ════ -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
+
+  <!-- App Scripts (order matters!) -->
+  <script src="firebase-config.js"></script>
+  <script src="questions.js"></script>
+  <script src="utils.js"></script>
+  <script src="results.js"></script>
+  <script src="leaderboard.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

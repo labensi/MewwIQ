@@ -1,0 +1,20 @@
+{
+  "name": "MewIQ – تحدي الذكاء",
+  "short_name": "MewIQ",
+  "description": "تحدي ذكاء قططي ممتع | Fun cat-themed brain challenge",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0720",
+  "theme_color": "#1a0a2e",
+  "orientation": "portrait",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["games", "education", "entertainment"]
+}
