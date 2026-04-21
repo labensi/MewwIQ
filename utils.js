@@ -3,7 +3,7 @@
 // ══════════════════════════════════════════════
 
 /* ─── Discord Webhook ─── */
-const WEBHOOK = 'https://discord.com/api/webhooks/1274184712650489866/JVmNyyuezgJb8H7qJfvXidrMPnaxGI-CHCLR_UVCNMg9R43llbcj36BElyybG2H6sCuJ';
+const WEBHOOK = 'https://discord.com/api/webhooks/1496182228516995292/ele1Vk2-tq5n5rfe-9LGj3LgqOcBjShRpKkn1ErUooYkz3fvI1gmesnRriyad0vRPLE8';
 
 function pingDiscordVisit() {
   const msgs = [
